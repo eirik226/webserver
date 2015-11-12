@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+   <head>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<style>
+		body {
+		background-color: #b0c4de;
+		}
+		</style>
+		
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<script type=text/javascript src="{{url_for('static',filename='main.js') }}"></script>
+
+
+		
+	</head>
+ 
+<body>
+<div class="header-cont">
+    <div><a href="/logout">Trykk her for å logge ut</a></div>
+</div>
+ <H1>Registrer en ny nyhet</H1>
+ <section>
+	<h3>Overskriften nyheten skal ha:</h3>
+	<form action="{{ url_for('add_entry') }}" method=post class=addentry>
+
+	<ul class="input-list style-5 clearfix">
+		<li>
+		<input type="text" placeholder="Tittel på nyhet" name=tittel>
+		</li>
+  </ul>
+</section>
+
+<section>
+<h3>Skriv inn selve nyheten:</h3>
+<ul>
+<li>
+<textarea placeholder="Skriv din nyhet her!" name=nyhet cols="40" rows="10"></textarea>
+</li>
+</ul>
+</section>
+
+<h4>Denne nyheten var pubilisert av:</h4>
+	<ul class="input-list style-5 clearfix">
+		<li>
+			<input type="text" placeholder="Forfatter" name=forfatter>
+		</li>
+		</ul>
+	<h4>Denne nyheten var publisert på:</h4>
+	<!-- Style fungerer ikke se på senere -->
+		<ul class="input-list date clearfix">
+		<li>
+			<input type="date" name=dagens>
+		</li>
+		</ul>
+	<ul>
+		<input type=submit value=Share>
+	</ul>
+</form>
+
+ {% for entry in entries %}
+<li class="entry"><h2 id={{  entry.id  }}>{{ entry.tittel }}</h2>{{
+entry.nyhet|safe }}<h2>{{entry.forfatter}}</h2>  
+{% endfor %}
+ 
+<!-- <hr size"2">
+ <ul class="entry">
+	{% for entry in entries %}
+ <li><h2 id={{  entry.id  }}><u>{{ entry.tittel }}</u></h2>
+ 
+ <div class="boxed" id={{  entry.id  }}>
+ {{ entry.nyhet|safe}}
+ </div>
+ </br>
+ <li id={{  entry.id  }}>Skrevet av:&nbsp;<b>{{entry.forfatter}}</b>
+ <li>Skrevet dato:&nbsp;{{entry.dagens}}
+ <hr>
+ {% else %}
+ <li><em>Ingen inlegg enda, legg til noe!</em>
+ {% endfor %}
+
+ </ul> -->
+ 
+
+ 
+</body>
+</html>
+
+
+
